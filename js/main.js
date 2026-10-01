@@ -166,6 +166,7 @@ function renderGamePage() {
           <h4>AVAILABILITY</h4>
           <a class="btn btn--solid" href="#" onclick="return false">${ctaLabel}</a>
           <a class="btn btn--ghost" href="mailto:hello@chipstackstudios.com?subject=${encodeURIComponent(g.title)}">ASK US ANYTHING</a>
+          ${g.privacy ? `<a class="btn btn--ghost" href="${g.privacy}">PRIVACY POLICY</a>` : ""}
         </div>
       </aside>
     </div>

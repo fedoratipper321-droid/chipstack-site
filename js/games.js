@@ -27,6 +27,7 @@ const GAMES = [
       { title: "THE TOWN OF LOWTIDE", body: "Meet the locals, take their contracts, and figure out what the tide keeps bringing in." },
       { title: "BUILD YOUR OPERATION", body: "From a rusty shack to a full salvage yard — tools, workshops, and reputation." },
     ],
+    privacy: "privacy-salvage-junkies.html",
   },
   {
     slug: "blackjack-empire",
