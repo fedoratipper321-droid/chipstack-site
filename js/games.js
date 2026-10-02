@@ -1,5 +1,5 @@
 /* ============================================================
-   CHIPSTACK STUDIOS — game registry
+   CHIPSTACK STUDIOS · game registry
 
    To add a game: append an object to GAMES. It automatically
    appears in the Games grid, the Upcoming list (if its status
@@ -13,41 +13,257 @@ const GAMES = [
     title: "SALVAGE JUNKIES",
     status: "in-development",
     year: "TBA",
-    platforms: ["iOS", "ANDROID"],
+    platforms: ["ANDROID"],
     accent: "#ff6b2c",
     art: "salvage",
-    tagline: "Dismantle junk. Recover treasure. Build Lowtide's greatest salvage operation.",
-    short: "A tactile mobile salvage game about dismantling junk, recovering valuable parts, exploring the strange coastal town of Lowtide, and building your salvage operation.",
-    description: [
-      "Lowtide is a strange little coastal town where the tide brings in more than driftwood. Wrecked machines, mysterious cargo, and honest-to-goodness treasure wash up on the shore — and someone has to take it all apart.",
-      "Salvage Junkies is a tactile salvage simulator built for touch. Pull apart rusted machinery piece by piece, learn what's worth keeping, and turn a rusty scrapyard into a thriving operation. Sell parts, take contracts, upgrade your tools, and slowly uncover why Lowtide's shoreline hides so much weird stuff.",
-    ],
-    features: [
-      { title: "TACTILE DISMANTLING", body: "Every piece of junk is a puzzle. Strip bolts, pry panels, and pull parts by hand." },
-      { title: "THE TOWN OF LOWTIDE", body: "Meet the locals, take their contracts, and figure out what the tide keeps bringing in." },
-      { title: "BUILD YOUR OPERATION", body: "From a rusty shack to a full salvage yard — tools, workshops, and reputation." },
-    ],
     privacy: "privacy-salvage-junkies.html",
+    tagline: "The tide keeps bringing it in. Somebody has to take it apart.",
+    short: "A tactile salvage game. Drag the junk home, take it apart by hand, and find out what the tide left inside it.",
+    banner: "img/sj/hero.webp",
+    cardArt: "img/sj/hero.webp",
+
+    pitch: [
+      "Something washes ashore. You drag it back to the yard and take it apart by hand. Screw by screw, wire by wire, panel by panel.",
+      "What it's worth is half the question. Where it came from is the other half.",
+    ],
+
+    loop: ["FIND JUNK", "TEAR IT APART", "SORT IT", "SELL IT", "UPGRADE", "FIND STRANGER JUNK"],
+
+    verbs: ["LOOSEN", "POP", "PRY", "SNIP", "DRAIN", "WIPE", "SHAKE", "BLOW", "TORCH", "PICK", "SORT"],
+
+    description: [
+      "There is no salvage button. You work the object: spin each screw until it lets go, snip the wiring, pry the panel until it cracks free, drain what's still inside, scrub the grime off, shake the stuck parts loose. Every lot on the bench is a small physical puzzle: part fidget toy, part archaeology. It resists before it opens.",
+      "The money goes back into the yard. Better tools, a crusher, processing rigs, a crew, contracts. Early on you are the machine; later the machines keep working while you're gone. But the best finds still end up on your bench.",
+    ],
+
+    ladder: {
+      steps: ["TOASTERS", "APPLIANCES", "VEHICLES", "TRAWLERS", "AIRCRAFT", "SATELLITES"],
+      caption: "You start with busted toasters. You end up cracking open things that were once in orbit. Somebody built all of it. Nobody in Lowtide remembers who.",
+    },
+
+    shots: [
+      { img: "img/sj/shot-bench.webp", alt: "Dismantling an office PC on the bench: spinning screws out, snipping wires, blowing dust off" },
+      { img: "img/sj/shot-sort.webp",  alt: "Sorting recovered material into bins after a strip" },
+      { img: "img/sj/shot-yard.webp",  alt: "Expanding the salvage yard into a working operation" },
+    ],
+
+    world: {
+      map: "img/sj/lowtide-map.webp",
+      intro: "A strange little coastal town built on top of whatever was here before it. The tide keeps a schedule nobody understands: wreckage, machinery, cargo, curiosities. Lowtide has shops, rumors and history. It was running before you arrived, and it keeps running while you work.",
+      characters: [
+        { name: "SCRAPS", species: "RACCOON", role: "YARD MANAGER", portrait: "img/sj/dossier-scraps.webp",
+          note: "Runs the yard and shows you the ropes. Sees value where everyone else sees garbage. Slightly smug about it.",
+          file: {
+            notes: [
+              "Knows every corner of the yard by memory.",
+              "Keeps tools that were replaced years ago.",
+              "Has repaired the same machinery more times than he can count.",
+              "Interested in the past when the past becomes useful.",
+            ],
+            quote: "If somebody threw it away, they probably didn't know what they had.",
+          } },
+        { name: "BEAVIS", species: "BEAVER", role: "TOOL SHOP", portrait: "img/sj/dossier-beavis.webp",
+          note: "Believes a good tool outlives its owner. The kindest creature in Lowtide.",
+          file: {
+            notes: [
+              "His shop has always been there. Ask anyone.",
+              "Repairs what everyone else would replace.",
+              "Wears a name badge that reads HELLO, I'M BEAVIS.",
+              "Never judges a beginner. Simply explains it.",
+            ],
+            quote: "Good tools don't do the work for you. They help you do it right.",
+          } },
+        { name: "OLIVER", species: "OWL", role: "CURIOSITIES", portrait: "img/sj/dossier-oliver.webp",
+          note: "The monocle is the bottom of a salvaged bottle. Asks where things came from. Sometimes the answer is \"I don't know.\"",
+          file: {
+            notes: [
+              "His shop is an archive that happens to accept visitors.",
+              "Keeps detailed notes on every unusual object.",
+              "Gets excited, not frustrated, by things he can't identify.",
+              "Closer than anyone to understanding who came before.",
+            ],
+            quote: "An object can tell you who made it, what they valued, and sometimes what happened to them.",
+          } },
+        { name: "BANJO", species: "FOX", role: "THE ALLEY", portrait: "img/sj/dossier-banjo.webp",
+          note: "Knows a guy. Everything has a price; the trick is finding who wants it.",
+          file: {
+            notes: [
+              "Can get things. Nobody is entirely sure how.",
+              "Keeps the valuable stock hidden, not displayed.",
+              "Never gives a straight answer about where something came from.",
+              "Knows Lowtide's unofficial economy better than he admits.",
+            ],
+            quote: "Everything has a price. The trick is finding the person who wants it.",
+          } },
+        { name: "ROCCO", species: "RHINO", role: "YARD WORKS", portrait: "img/sj/dossier-rocco.webp",
+          note: "Broke his horn, fixed it with scrap and tape. Calm, enormous, allergic to nonsense.",
+          file: {
+            notes: [
+              "Keeps Lowtide's heavy machinery alive.",
+              "The horn was repaired, not replaced. It works. That is enough.",
+              "Keeps emergency parts around because you never know.",
+              "Does not hand out praise. When it comes, it counts.",
+            ],
+            quote: "If it breaks, fix it. If it keeps breaking, build it better.",
+          } },
+      ],
+      places: [
+        { name: "HIGHPOINT", image: "img/sj/highpoint-map.webp",
+          text: "The big city, where salvage stopped being a side job a long time ago. Riley's exchange pays city rates with a contracts board and materials running hot. Fill every page of Scraps' file and family gets the family rate.",
+          residents: [
+            { name: "RILEY", img: "img/sj/mug-riley.webp", tag: "RILEY'S EXCHANGE",
+              file: {
+                notes: [
+                  "Scraps' cousin. The family resemblance ends at the fur.",
+                  "Runs the market: premium rates, rotating contracts, two materials HOT each day.",
+                  "Complete Scraps' file and the family discount kicks in.",
+                ],
+                quote: "Family rate, on the house. Tell Scraps the file says hi.",
+              } },
+            { name: "VICTOR", img: "img/sj/mug-victor.webp", tag: "SUMMIT SALVAGE GROUP",
+              file: {
+                notes: [
+                  "Sells systems, not tools: sorting crews, extended hours, process audits.",
+                  "Everything installs remotely at your yard back in Lowtide.",
+                  "The corporate end of the salvage world. Still dryly funny about it.",
+                ],
+                quote: "Nothing here touches your hands. Systems do the work, you sign the invoice.",
+              } },
+            { name: "CELESTE", img: "img/sj/mug-celeste.webp", tag: "THE ATELIER",
+              file: {
+                notes: [
+                  "Waterfront district. Polished floors, glass cases, prices to match.",
+                  "Doesn't sell tools. Grades your work instead.",
+                  "A flawless teardown becomes certified stock, and she pays what it's worth.",
+                ],
+              } },
+          ] },
+        { name: "TROLLHOLM", image: "img/sj/trollholm-map.webp",
+          text: "A Nordic harbor town folded into a fjord. Astrid restores what you dig up. Kåre pays wages for honest forge shifts. Bjarne runs the games table at the harbor.",
+          residents: [
+            { name: "ASTRID", img: "img/sj/mug-astrid.webp", tag: "FINE WORKS",
+              file: {
+                notes: [
+                  "Norwegian Forest Cat. Elegant, precise, particular about quality.",
+                  "Runs the restoration bench: one broken artifact at a time, done properly.",
+                  "Find the glints on the map, bring them to her, sell the results in Highpoint.",
+                ],
+                quote: "If it is worth doing, it is worth doing properly.",
+              } },
+            { name: "BJARNE", img: "img/sj/mug-bjarne.webp", tag: "THE GILDED BUOY",
+              file: {
+                notes: [
+                  "Harbor puffin. Knows everyone, talks to everyone, hears everything.",
+                  "Runs the games table. House rules: he pays, you play.",
+                  "Cups and seed, driftwood pairs, the perfect pour. Beat him fair.",
+                ],
+              } },
+            { name: "KÅRE", img: "img/sj/mug-kare.webp", tag: "THE IRONWORKS",
+              file: {
+                notes: [
+                  "Moose. Massive, quiet, patient. The forge does the talking.",
+                  "The only shop where you buy nothing. You work a shift and earn a wage.",
+                  "Stoke, stamp, haul. Five ingots a shift. Rank up and the pay climbs.",
+                ],
+              } },
+          ] },
+      ],
+      travel: "Ferries connect the towns. How far you can sail is part of how far you've come.",
+    },
+
+    files: [
+      { title: "THE GOSSIP DOSSIER", img: "img/sj/shot-gossip.webp",
+        imgAlt: "An in-game case file: taped-up dossier page filling with notes about a resident",
+        body: "Lowtide doesn't explain itself. Talk to people and their files start filling in. Habits, history, who owes whom. One resident's page says something about another's, and a shop you ignored becomes the most interesting place in town. Finishing a file means visiting everyone." },
+      { title: "THE ODD DRAWER", img: "img/sj/odd-drawer.webp",
+        imgAlt: "Oliver's curiosities shop, shelves of strange objects collected in Lowtide",
+        body: "The strangest finds never get sold. They go in the drawer: a permanent collection of things that washed ashore for reasons nobody can explain. Yet." },
+    ],
+
+    closer: "Tonight, something else washes up. Nobody knows what it is. You'll have it apart by morning.",
   },
   {
     slug: "blackjack-empire",
     title: "BLACKJACK EMPIRE",
     status: "released",
     year: "2025",
-    platforms: ["iOS", "ANDROID"],
+    platforms: ["ANDROID"],
     accent: "#35c27a",
+    accentInk: "#8fdc9a",
     art: "blackjack",
-    tagline: "Hit. Stand. Build an empire one table at a time.",
-    short: "A mobile casino empire-builder centered on blackjack: progression, upgrades, and a bankroll that grows from a folding table to a skyline.",
+    banner: "img/bj/feature.webp",
+    cardArt: "img/bj/feature.webp",
+    privacy: "privacy-policy-chip.html",
+    tagline: "Every hand builds an empire.",
+    short: "Real blackjack where every winning hand is capital. Build casinos, run the floor, trade the market, and climb until the casino is in orbit.",
+
+    pitch: [
+      "You start with $50,000 and a seat at the table.",
+      "Every hand you win is capital. What you do with it is the rest of the game.",
+    ],
+
+    loop: ["PLAY", "WIN", "INVEST", "BUILD", "EARN", "REINVEST", "EXPAND"],
+
+    verbs: ["HIT", "STAND", "DOUBLE", "SPLIT", "SURRENDER", "INSURANCE"],
+
     description: [
-      "Start with a folding table, a borrowed deck, and fifty chips. End with a skyline.",
-      "Blackjack Empire pairs tight, satisfying blackjack with a full empire-building progression loop. Win hands, grow your bankroll, buy and upgrade casinos, and climb from backroom games to owning the whole strip. Every table you beat funds the next one you build.",
+      "It begins as honest blackjack. Dealer stands on soft 17, blackjack pays 3:2, and the table moves at whatever pace you set it. The table is the foundation. It is not a minigame on the way to something else.",
+      "Then the stakes change shape. Winnings buy casinos. Casinos earn by the hour as long as payroll is covered. Capital moves into markets and collections, net worth unlocks ranks, and eventually the property you are managing is not on the ground at all.",
     ],
-    features: [
-      { title: "REAL BLACKJACK", body: "Clean, fast, satisfying blackjack — no gimmicks, just great cards." },
-      { title: "EMPIRE PROGRESSION", body: "Buy casinos, upgrade floors, and watch your bankroll compound into a skyline." },
-      { title: "BUILT FOR SHORT SESSIONS", body: "A hand takes seconds. An empire takes... slightly longer." },
+
+    shots: [
+      { img: "img/bj/shot-table.webp", alt: "A hand in progress: hit, stand or double, with Lucky Escape on the rail" },
+      { img: "img/bj/shot-joker.webp", alt: "The Joker wild card drawn: keep your hand or switch with the dealer" },
+      { img: "img/bj/shot-map.webp",   alt: "The property network map: Ocean Star Casino earning $500K an hour" },
     ],
+
+    arc: [
+      { stage: "THE TABLE",
+        body: "Real decisions, deliberate pacing, cards that land with weight. Two house rules bend the odds. The Joker is yours alone: about one hand in twelve it lands, and you may switch hands with the dealer on the spot or take a replacement card. Lucky Escape costs 25% of the wager for a true 50/50 chance to keep a losing bet." },
+      { stage: "THE BANKROLL",
+        body: "The starting stake is not the goal. It is seed money. Chips in hand become property on the map, and the map is where the empire lives." },
+      { stage: "THE FLOOR",
+        body: "Five casinos stand between the table and the sky. Revenue runs in real time and payroll comes due every 24 hours; a property that misses it suspends operations. Owning the house is a job, not a trophy.",
+        cards: [
+          { img: "img/bj/casino-studio.webp",  name: "CASINO DISTRICT STUDIO", tag: "PROPERTY 01" },
+          { img: "img/bj/casino-mirage.webp",  name: "GOLDEN MIRAGE",          tag: "PROPERTY 02" },
+          { img: "img/bj/casino-crown.webp",   name: "CROWN ROYALE",           tag: "PROPERTY 03" },
+          { img: "img/bj/casino-imperium.webp",name: "IMPERIUM",               tag: "PROPERTY 04" },
+          { img: "img/bj/casino-ocean.webp",   name: "OCEAN STAR",             tag: "PROPERTY 05" },
+        ] },
+      { stage: "THE OPERATION",
+        body: "Each property upgrades through fifteen levels of gaming floor, guest services and marketing. Host named VIPs at your own private tables while the floor keeps earning, and read the operating statement like an owner, not a player." },
+      { stage: "THE MARKET", tone: "#d9a441",
+        body: "Casino equity, a volatile crypto line, property indices. Prices move with a rotating daily world event, so timing is its own game. Cars, jewelry, art and property sit in the vault as collections; standard resale returns 72 cents on the dollar. At some point you stop thinking about the next hand and start thinking about the next position.",
+        cards: [
+          { img: "img/bj/asset-watch.webp",    name: "JEWELRY",    tag: "COLLECTION" },
+          { img: "img/bj/asset-car.webp",      name: "CARS",       tag: "COLLECTION" },
+          { img: "img/bj/asset-property.webp", name: "PROPERTIES", tag: "COLLECTION" },
+        ] },
+      { stage: "THE CLIMB", tone: "#d9a441",
+        body: "Net worth is the scoreboard. Eight ranks stand between the first chip and the last door.",
+        ranks: [
+          { name: "ROOKIE",   at: "$0" },
+          { name: "BRONZE",   at: "$100K" },
+          { name: "SILVER",   at: "$500K" },
+          { name: "GOLD",     at: "$1M" },
+          { name: "PLATINUM", at: "$2M" },
+          { name: "DIAMOND",  at: "$5M" },
+          { name: "ELITE",    at: "$12M" },
+          { name: "LEGEND",   at: "$30M" },
+        ] },
+      { stage: "HIGH ROLLER", tone: "#a86fd6", img: "img/bj/penthouse.webp",
+        imgAlt: "The penthouse-level private room",
+        body: "At $50,000,000 net worth the game opens a private room. The High Roller table takes a $1,000,000 minimum and bets run to $50M. Regular wins pay 2.2x, a natural pays 3x. The numbers are not the point. The room is." },
+      { stage: "THE BLACK CARD", tone: "#e8e4da",
+        body: "Own all five casinos and finish all seventy-five upgrades. The Black Card cannot be bought. It is granted. What it opens does not appear on the map until you hold it." },
+      { stage: "THE ORBITAL", tone: "#7ec8e0", img: "img/bj/orbital.webp",
+        imgAlt: "The Celestial Crown casino station in orbit",
+        body: "The Celestial Crown: a casino in orbit pulling roughly $420,000 an hour at base. It runs on its own systems: Quantum Gaming Core, Autonomous Habitat Ring, Deep-Space Signal Array. And it has its own problems. Asteroid storms, pirate raids, solar flares, rival corporations. You came here to play twenty-one." },
+    ],
+
+    closer: "One table. One bankroll. Five casinos. Then one more address, slightly higher than the rest.",
+    legal: "Blackjack Empire is simulated gambling for adults 18 and over. All chips, money and prizes are virtual. Nothing can be won, withdrawn or redeemed for real money. Play responsibly.",
   },
 ];
 
