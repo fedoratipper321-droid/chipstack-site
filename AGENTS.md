@@ -77,6 +77,14 @@ then open http://localhost:8000. (Game pages use `?slug=` query params, so
 opening `index.html` via `file://` works for the homepage but the detail
 pages are best viewed over HTTP.)
 
+## Deploy / cache
+
+Hosted on Cloudflare Pages. `_headers` forces HTML/CSS/JS to revalidate
+every load and caches `img/` for a year. CSS/JS references carry a
+`?v=<tag>` query string — bump the tag (same string in every file) whenever
+you change `css/style.css`, `js/games.js`, or `js/main.js`, so repeat
+visitors never get a stale bundle.
+
 ## Conventions
 
 - Display type: Changa One (matches the logo); body: Space Grotesk; labels: JetBrains Mono

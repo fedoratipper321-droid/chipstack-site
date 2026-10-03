@@ -427,14 +427,8 @@ img, svg { display: block; max-width: 100%; }
   border-top: 1px solid var(--line-soft);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-.card-num {
-  font-family: var(--font-mono);
-  font-size: .72rem;
-  color: var(--muted);
-  letter-spacing: .2em;
+  gap: .75rem;
+  flex-wrap: wrap;
 }
 
 /* ---------- upcoming ---------- */

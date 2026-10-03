@@ -57,7 +57,6 @@ function renderGames() {
             ${g.store ? `<a class="btn btn--ghost" href="${g.store}" target="_blank" rel="noopener">GOOGLE PLAY
               <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M6 3l7 5-7 5V3z" fill="currentColor"/></svg>
             </a>` : ""}
-            <span class="card-num">${pad2(i)}</span>
           </div>
         </div>
       </article>
