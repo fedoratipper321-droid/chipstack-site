@@ -1,0 +1,30 @@
+CHIPSTACK STUDIOS - PRESS BOILERPLATE
+
+Short:
+Chipstack Studios is one person making games in the Aland Islands.
+Short sessions, long obsessions.
+
+Long (boilerplate):
+Chipstack Studios is an independent game studio run by a single person,
+Mikael, out of the Aland Islands. Founded in February 2026, the studio
+builds tactile, opinionated mobile games designed for short sessions and
+long obsessions. Its first two titles, Blackjack Empire (September 2026)
+and Salvage Junkies (October 2026), are available on Google Play.
+
+Salvage Junkies (short):
+A tactile salvage game set in Lowtide, a strange coastal town where junk
+washes ashore and nobody remembers who built it. Take wrecks apart on the
+bench, piece by piece, sort the materials, and climb from toasters to
+orbital debris.
+
+Blackjack Empire (short):
+A blackjack game that escalates into a casino empire simulator. Win hands,
+buy casinos, cover payroll, trade markets, climb VIP ranks, and end up
+running a casino in orbit. Simulated gambling for adults 18+, virtual
+currency only, no real-money winnings.
+
+Links:
+Site: https://chipstack-site.pages.dev
+Salvage Junkies: https://play.google.com/store/apps/details?id=com.salvagejunkies.game
+Blackjack Empire: https://play.google.com/store/apps/details?id=com.chipstackstudios.blackjackblitz
+Contact: hello@chipstackstudios.com

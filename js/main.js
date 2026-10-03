@@ -486,6 +486,95 @@ function initHeroScroll() {
   }, { passive: true });
 }
 
+const GLYPHS = "█▓▒░!<>-_/[]{}=+*^?#|";
+const randGlyph = () => GLYPHS[(Math.random() * GLYPHS.length) | 0];
+const cipher = (orig, step, total) => {
+  const reveal = Math.floor((step / total) * orig.length);
+  return [...orig].map((ch, i) =>
+    /\s/.test(ch) ? ch : i < reveal ? ch : randGlyph()
+  ).join("");
+};
+
+function initScramble() {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  // marked elements: hover anywhere in their zone decrypts them
+  document.querySelectorAll("[data-scramble]").forEach(el => {
+    const orig = el.textContent;
+    const zone = el.closest(".upcoming-slot, .site-footer") || el;
+    let busy = false, step = 0;
+    const tick = () => {
+      step++;
+      el.textContent = step >= 34 ? orig : cipher(orig, step, 34);
+      if (step < 34) requestAnimationFrame(tick); else busy = false;
+    };
+    zone.addEventListener("mouseenter", () => { if (!busy) { busy = true; step = 0; tick(); } });
+  });
+
+  // every button + nav link: decrypt text nodes on hover (icons/svg untouched)
+  document.querySelectorAll(".btn, .nav-links a").forEach(el => {
+    const nodes = [...el.childNodes].filter(n => n.nodeType === 3 && /\S/.test(n.nodeValue));
+    if (!nodes.length) return;
+    const origs = nodes.map(n => n.nodeValue);
+    let busy = false, step = 0;
+    const tick = () => {
+      step++;
+      nodes.forEach((n, i) => { n.nodeValue = step >= 22 ? origs[i] : cipher(origs[i], step, 22); });
+      if (step < 22) requestAnimationFrame(tick); else busy = false;
+    };
+    el.addEventListener("mouseenter", () => { if (!busy) { busy = true; step = 0; tick(); } });
+  });
+
+  // headers sit as ciphertext below the fold and decode on scroll-in
+  const heads = document.querySelectorAll(".section-title, .prose h1, .prose h2, .game-hero-title");
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      const h = en.target, orig = h.dataset.orig;
+      if (!en.isIntersecting) { h.textContent = cipher(orig, 0, 1); return; }
+      let step = 0;
+      const tick = () => {
+        step++;
+        h.textContent = step >= 26 ? orig : cipher(orig, step, 26);
+        if (step < 26) requestAnimationFrame(tick);
+      };
+      tick();
+      io.unobserve(h);
+    });
+  }, { rootMargin: "0px 0px -12% 0px" });
+  heads.forEach(h => { h.dataset.orig = h.textContent; io.observe(h); });
+}
+
+function initDeclassify() {
+  const marks = document.querySelectorAll(".redact");
+  if (!marks.length) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    marks.forEach(m => m.classList.add("clear"));
+    return;
+  }
+  marks.forEach((m, i) => { m.style.transitionDelay = `${i * .35}s`; });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add("clear");
+      io.unobserve(en.target);
+    });
+  }, { rootMargin: "0px 0px -30% 0px" });
+  marks.forEach(m => io.observe(m));
+}
+
+function initCopyBlocks() {
+  document.querySelectorAll(".boiler").forEach(b => {
+    b.title = "Click to copy";
+    b.addEventListener("click", () => {
+      navigator.clipboard?.writeText(b.innerText.trim());
+      b.classList.remove("copied");
+      void b.offsetWidth;
+      b.classList.add("copied");
+      setTimeout(() => b.classList.remove("copied"), 1400);
+    });
+  });
+}
+
 function initYear() {
   const y = $("#year");
   if (y) y.textContent = new Date().getFullYear();
@@ -501,6 +590,7 @@ function initFactGames() {
 [
   renderGames, renderUpcoming, renderFooterGames,
   renderGamePage, initNav, initYear, initFactGames, initHeroScroll, initPageTransitions,
+  initScramble, initDeclassify, initCopyBlocks,
 ].forEach(fn => {
   try { fn(); } catch (err) { console.error(`[chipstack] ${fn.name} failed:`, err); }
 });
