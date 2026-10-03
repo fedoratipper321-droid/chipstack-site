@@ -11,11 +11,12 @@ const GAMES = [
   {
     slug: "salvage-junkies",
     title: "SALVAGE JUNKIES",
-    status: "in-development",
-    year: "TBA",
+    status: "released",
+    year: "2026",
     platforms: ["ANDROID"],
     accent: "#ff6b2c",
     art: "salvage",
+    store: "https://play.google.com/store/apps/details?id=com.salvagejunkies.game",
     privacy: "privacy-salvage-junkies.html",
     tagline: "The tide keeps bringing it in. Somebody has to take it apart.",
     short: "A tactile salvage game. Drag the junk home, take it apart by hand, and find out what the tide left inside it.",
@@ -191,6 +192,7 @@ const GAMES = [
     accent: "#35c27a",
     accentInk: "#8fdc9a",
     art: "blackjack",
+    store: "https://play.google.com/store/apps/details?id=com.chipstackstudios.blackjackblitz",
     banner: "img/bj/feature.webp",
     cardArt: "img/bj/feature.webp",
     privacy: "privacy-policy-chip.html",
@@ -219,7 +221,7 @@ const GAMES = [
 
     arc: [
       { stage: "THE TABLE",
-        body: "Real decisions, deliberate pacing, cards that land with weight. Two house rules bend the odds. The Joker is yours alone: about one hand in twelve it lands, and you may switch hands with the dealer on the spot or take a replacement card. Lucky Escape costs 25% of the wager for a true 50/50 chance to keep a losing bet." },
+        body: "Real decisions, deliberate pacing, cards that land with weight. Two house rules bend the odds. The Joker is yours alone: about one hand in twelve it lands, and you may switch hands with the dealer on the spot or take a replacement card. Lucky Escape costs 25% of the wager for a true 50/50 chance to keep a losing bet. The table keeps the books as well: hands played, blackjacks dealt, and every win and loss streak on record." },
       { stage: "THE BANKROLL",
         body: "The starting stake is not the goal. It is seed money. Chips in hand become property on the map, and the map is where the empire lives." },
       { stage: "THE FLOOR",

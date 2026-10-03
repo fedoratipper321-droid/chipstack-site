@@ -54,6 +54,9 @@ function renderGames() {
             <a class="btn btn--ghost" href="${gameURL(g)}">VIEW GAME
               <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M2 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="square"/></svg>
             </a>
+            ${g.store ? `<a class="btn btn--ghost" href="${g.store}" target="_blank" rel="noopener">GOOGLE PLAY
+              <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M6 3l7 5-7 5V3z" fill="currentColor"/></svg>
+            </a>` : ""}
             <span class="card-num">${pad2(i)}</span>
           </div>
         </div>
@@ -326,7 +329,9 @@ function renderGamePage() {
         </div>
         <div class="sidebar-block">
           <h4>AVAILABILITY</h4>
-          <a class="btn btn--solid" href="#" onclick="return false">${ctaLabel}</a>
+          ${g.store
+            ? `<a class="btn btn--solid" href="${g.store}" target="_blank" rel="noopener">GET IT ON GOOGLE PLAY</a>`
+            : `<a class="btn btn--solid" href="#" onclick="return false">${ctaLabel}</a>`}
           <a class="btn btn--ghost" href="mailto:hello@chipstackstudios.com?subject=${encodeURIComponent(g.title)}">ASK US ANYTHING</a>
           ${g.privacy ? `<a class="btn btn--ghost" href="${g.privacy}">PRIVACY POLICY</a>` : ""}
         </div>
