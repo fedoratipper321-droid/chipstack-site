@@ -75,13 +75,7 @@ function renderUpcoming() {
       <span class="upcoming-plat">${g.platforms.join(" / ")} · ${g.year}</span>
       <span class="upcoming-arrow">-&gt;</span>
     </a>
-  `).join("") || `
-    <div class="upcoming-row" style="--game-accent:var(--accent)">
-      <span class="upcoming-idx">[--]</span>
-      <span class="upcoming-title">NOTHING ANNOUNCED. YET.</span>
-      <span class="upcoming-plat"></span>
-      <span class="upcoming-arrow"></span>
-    </div>`;
+  `).join("");
 }
 
 function renderFooterGames() {
