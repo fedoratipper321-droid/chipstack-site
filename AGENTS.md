@@ -85,6 +85,10 @@ every load and caches `img/` for a year. CSS/JS references carry a
 you change `css/style.css`, `js/games.js`, or `js/main.js`, so repeat
 visitors never get a stale bundle.
 
+**Domain lands Oct 15, 2026.** When the real domain is attached, swap
+`https://chipstack-site.pages.dev` for it in `robots.txt`, `sitemap.xml`,
+and the `og:`/`twitter:` meta tags in `index.html` and `game.html`.
+
 ## Conventions
 
 - Display type: Changa One (matches the logo); body: Space Grotesk; labels: JetBrains Mono

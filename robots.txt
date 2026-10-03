@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chipstack-site.pages.dev/sitemap.xml

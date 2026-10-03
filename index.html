@@ -4,12 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CHIPSTACK STUDIOS · Independent Games</title>
-  <meta name="description" content="Chipstack Studios is an independent game studio making distinctive, experimental, accessible games. Home of Salvage Junkies and Blackjack Empire." />
+  <meta name="description" content="Chipstack Studios is an independent game studio. Short sessions, long obsessions. Home of Salvage Junkies and Blackjack Empire." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Chipstack Studios" />
+  <meta property="og:description" content="Independent games. Short sessions, long obsessions." />
+  <meta property="og:image" content="https://chipstack-site.pages.dev/img/og.png" />
+  <meta property="og:url" content="https://chipstack-site.pages.dev/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Chipstack Studios" />
+  <meta name="twitter:description" content="Independent games. Short sessions, long obsessions." />
+  <meta name="twitter:image" content="https://chipstack-site.pages.dev/img/og.png" />
   <link rel="icon" type="image/png" href="logo-icon.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
+  <link rel="preload" as="image" href="logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Changa+One&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=2610a" />
+  <link rel="stylesheet" href="css/style.css?v=2610b" />
 </head>
 <body>
 
@@ -22,7 +33,7 @@
       <div class="nav-right">
         <div class="nav-links" id="nav-links">
           <a href="#games">GAMES</a>
-          <a href="#upcoming">UPCOMING</a>
+          <a href="#upcoming">NEXT</a>
           <a href="#about">ABOUT</a>
           <a href="mailto:hello@chipstackstudios.com">CONTACT</a>
         </div>
@@ -40,7 +51,7 @@
       <h1 class="sr-only">Chipstack Studios</h1>
       <img class="hero-logo" src="logo.png" alt="Chipstack Studios" />
       <div class="hero-fade">
-        <p class="hero-tag">&ldquo;Independent games, made with questionable amounts of enthusiasm.&rdquo;</p>
+        <p class="hero-tag">SHORT SESSIONS · LONG OBSESSIONS</p>
         <p class="hero-intro">
           A small independent studio building distinctive mobile games:
           tactile, a little strange, and made to be picked up by anyone.
@@ -65,19 +76,19 @@
     </div>
   </section>
 
-  <!-- ============ UPCOMING ============ -->
+  <!-- ============ NEXT ============ -->
   <section class="section section--alt" id="upcoming">
     <div class="container">
       <div class="section-head">
-        <h2 class="section-title">UPCOMING</h2>
-        <p class="section-note">Currently in the workshop.<br/>Subject to enthusiastic change.</p>
+        <h2 class="section-title">NEXT</h2>
+        <p class="section-note">Intercepted transmissions.<br/>Clearance pending.</p>
       </div>
       <div class="upcoming-list" id="upcoming-list"></div>
       <div class="upcoming-slot">
         <div class="upcoming-slot-inner">
           <span class="status status--stealth">CLASSIFIED</span>
           <h3>NEXT PROJECT</h3>
-          <p class="mono-dim">TBA. Transmission incoming. We never stop stacking.</p>
+          <p class="mono-dim">Signal acquired. Decryption in progress. Contents redacted.</p>
         </div>
         <span class="upcoming-slot-mark">?</span>
       </div>
@@ -93,28 +104,47 @@
       <div class="about-grid">
         <div>
           <p class="about-lede">
-            Chipstack Studios is an independent game studio making
-            <em>distinctive, experimental, accessible</em> games.
+            Chipstack Studios is one person making games in the Åland Islands.
+          </p>
+          <p class="about-body">
+            That person is Mikael, and "we" means him, a desk, and whatever he decides
+            to make next. He started in web development and wanted a bigger creative
+            space: somewhere he could build anything he could think of.
+            Games turned out to be that space.
           </p>
           <p class="about-body">
             We like games with strong opinions: tactile little machines that are easy to pick up
             and hard to put down. No suits, no committees, no four-hundred-person teams.
-            Just a stubborn small studio stacking one strange idea on top of another and
+            Just a stubborn one-person studio stacking one strange idea on top of another and
             seeing what holds.
           </p>
           <p class="about-body">
-            Everything we make is built mobile-first, designed for short sessions and long
-            obsessions, and finished with more polish than our roadmap probably allows.
+            Everything we make is built mobile-first, designed for <em>short sessions and
+            long obsessions</em>, and finished with more polish than our roadmap probably allows.
           </p>
+          <p class="about-status mono-dim">STATUS: SHIPPING · NEXT TRANSMISSION ENCRYPTED</p>
+        </div>
+        <div class="about-side">
+        <div class="personnel">
+          <figure class="op-card">
+            <img src="img/about/mikael.webp" alt="Mikael, the person behind Chipstack Studios" loading="lazy">
+            <figcaption><b>MIKAEL</b><span>PRINCIPAL OPERATIVE</span></figcaption>
+          </figure>
+          <figure class="op-card">
+            <img src="img/about/bjorn.webp" alt="Björn the cat, quality assurance" loading="lazy">
+            <figcaption><b>BJÖRN</b><span>QA · WORKS FOR TREATS</span></figcaption>
+          </figure>
         </div>
         <dl class="facts">
           <div class="fact"><dt>FOUNDED</dt><dd>FEB 2026</dd></div>
-          <div class="fact"><dt>TYPE</dt><dd>INDEPENDENT</dd></div>
-          <div class="fact"><dt>FOCUS</dt><dd>MOBILE-FIRST</dd></div>
+          <div class="fact"><dt>OPERATIVE</dt><dd>MIKAEL</dd></div>
+          <div class="fact"><dt>LOCATION</dt><dd>ÅLAND ISLANDS</dd></div>
+          <div class="fact"><dt>HEADCOUNT</dt><dd>ONE + CAT</dd></div>
+          <div class="fact"><dt>DEPARTMENTS</dt><dd>ALL OF THEM</dd></div>
           <div class="fact"><dt>GAMES</dt><dd id="fact-games">02</dd></div>
-          <div class="fact"><dt>TEAM SIZE</dt><dd>SMALL. VERY.</dd></div>
-          <div class="fact"><dt>ENTHUSIASM</dt><dd>QUESTIONABLE</dd></div>
+          <div class="fact"><dt>OBSESSION</dt><dd>LONG</dd></div>
         </dl>
+        </div>
       </div>
     </div>
   </section>
@@ -128,7 +158,7 @@
           <a class="footer-logo-link" href="index.html">
             <img class="footer-logo" src="logo.png" alt="Chipstack Studios" />
           </a>
-          <p class="mono-dim">Independent games, made with<br/>questionable amounts of enthusiasm.</p>
+          <p class="mono-dim">Independent games.<br/>Short sessions, long obsessions.</p>
         </div>
         <div class="footer-col">
           <h4>GAMES</h4>
@@ -143,12 +173,12 @@
       </div>
       <div class="footer-bottom">
         <span>&copy; <span id="year">2026</span> CHIPSTACK STUDIOS</span>
-        <span>BUILT WITH QUESTIONABLE ENTHUSIASM</span>
+        <span>END OF TRANSMISSION</span>
       </div>
     </div>
   </footer>
 
-  <script src="js/games.js?v=2610a"></script>
-  <script src="js/main.js?v=2610a"></script>
+  <script src="js/games.js?v=2610b"></script>
+  <script src="js/main.js?v=2610b"></script>
 </body>
 </html>

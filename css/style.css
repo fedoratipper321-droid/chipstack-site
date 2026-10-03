@@ -522,6 +522,8 @@ img, svg { display: block; max-width: 100%; }
   color: var(--accent-ink);
 }
 .about-body { color: var(--muted); margin-bottom: 1.2rem; max-width: 58ch; }
+.about-body em { font-style: normal; color: var(--accent-ink); }
+.about-status { font-size: .7rem; letter-spacing: .14em; margin-top: 2rem; }
 
 .facts { border-top: 1px solid var(--line); }
 .fact {
@@ -881,6 +883,41 @@ img, svg { display: block; max-width: 100%; }
 .file-card:nth-child(odd)  { transform: rotate(-.5deg); }
 .file-card:nth-child(even) { transform: rotate(.55deg); }
 .file-card:hover { transform: rotate(0) translateY(-4px); border-color: var(--accent); }
+
+/* personnel files on the about page */
+
+.personnel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+.op-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: .7rem .7rem .8rem;
+  position: relative;
+  transition: transform .3s var(--ease), border-color .3s;
+}
+.op-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 60px;
+  height: 18px;
+  background: rgba(245, 179, 1, .32);
+  border-left: 1px dashed rgba(255,255,255,.25);
+  border-right: 1px dashed rgba(255,255,255,.25);
+  transform: translateX(-50%) rotate(-2.5deg);
+}
+.op-card:nth-child(odd)  { transform: rotate(-1deg); }
+.op-card:nth-child(even) { transform: rotate(.8deg); }
+.op-card:hover { transform: rotate(0) translateY(-4px); border-color: var(--accent); }
+.op-card img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+.op-card figcaption { font-family: var(--font-mono); text-align: center; padding-top: .75rem; }
+.op-card figcaption b { display: block; font-weight: 600; font-size: .8rem; letter-spacing: .14em; }
+.op-card figcaption span { display: block; margin-top: .3rem; font-size: .62rem; letter-spacing: .12em; color: var(--accent-ink); }
 
 .file-card-head {
   display: flex;
@@ -1273,6 +1310,7 @@ img, svg { display: block; max-width: 100%; }
   margin-bottom: 1rem;
 }
 .not-found p { color: var(--muted); margin-bottom: 2rem; }
+.not-found a + a { margin-left: .75rem; }
 
 /* ---------- privacy / prose page ---------- */
 
