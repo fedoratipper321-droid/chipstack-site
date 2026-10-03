@@ -538,6 +538,38 @@ function initScramble() {
   heads.forEach(h => { h.dataset.orig = h.textContent; io.observe(h); });
 }
 
+function initZoom() {
+  const targets = document.querySelectorAll(".peek-card img, .upcoming-slot-art img");
+  if (!targets.length) return;
+  document.body.insertAdjacentHTML("beforeend", `
+    <div class="zoom-modal" aria-hidden="true">
+      <div class="zoom-back"></div>
+      <img class="zoom-img" alt="" />
+    </div>`);
+  const modal = document.querySelector(".zoom-modal");
+  const img = modal.querySelector(".zoom-img");
+  const close = () => {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+  modal.addEventListener("click", close);
+  addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+  targets.forEach(t => {
+    const host = t.closest("figure") || t;
+    host.setAttribute("tabindex", "0");
+    const open = () => {
+      img.src = t.currentSrc || t.src;
+      img.alt = t.alt;
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    };
+    host.addEventListener("click", open);
+    host.addEventListener("keydown", e => { if (e.key === "Enter") open(); });
+  });
+}
+
 function initDeclassify() {
   const marks = document.querySelectorAll(".redact");
   if (!marks.length) return;
@@ -584,7 +616,7 @@ function initFactGames() {
 [
   renderGames, renderUpcoming, renderFooterGames,
   renderGamePage, initNav, initYear, initFactGames, initHeroScroll, initPageTransitions,
-  initScramble, initDeclassify, initCopyBlocks,
+  initScramble, initDeclassify, initCopyBlocks, initZoom,
 ].forEach(fn => {
   try { fn(); } catch (err) { console.error(`[chipstack] ${fn.name} failed:`, err); }
 });
