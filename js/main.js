@@ -325,7 +325,7 @@ function renderGamePage() {
           ${g.store
             ? `<a class="btn btn--solid" href="${g.store}" target="_blank" rel="noopener">GET IT ON GOOGLE PLAY</a>`
             : `<a class="btn btn--solid" href="#" onclick="return false">${ctaLabel}</a>`}
-          <a class="btn btn--ghost" href="mailto:hello@chipstackstudios.com?subject=${encodeURIComponent(g.title)}">ASK US ANYTHING</a>
+          <a class="btn btn--ghost" href="mailto:kontakt@vav.ax?subject=${encodeURIComponent(g.title)}">ASK US ANYTHING</a>
           ${g.privacy ? `<a class="btn btn--ghost" href="${g.privacy}">PRIVACY POLICY</a>` : ""}
         </div>
       </aside>
@@ -495,7 +495,7 @@ function initScramble() {
   // marked elements: hover anywhere in their zone decrypts them
   document.querySelectorAll("[data-scramble]").forEach(el => {
     const orig = el.textContent;
-    const zone = el.closest(".upcoming-slot, .site-footer") || el;
+    const zone = el.closest(".site-footer") || el;
     let busy = false, step = 0;
     const tick = () => {
       step++;
@@ -538,38 +538,6 @@ function initScramble() {
   heads.forEach(h => { h.dataset.orig = h.textContent; io.observe(h); });
 }
 
-function initZoom() {
-  const targets = document.querySelectorAll(".peek-card img, .upcoming-slot-art img");
-  if (!targets.length) return;
-  document.body.insertAdjacentHTML("beforeend", `
-    <div class="zoom-modal" aria-hidden="true">
-      <div class="zoom-back"></div>
-      <img class="zoom-img" alt="" />
-    </div>`);
-  const modal = document.querySelector(".zoom-modal");
-  const img = modal.querySelector(".zoom-img");
-  const close = () => {
-    modal.classList.remove("open");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  };
-  modal.addEventListener("click", close);
-  addEventListener("keydown", e => { if (e.key === "Escape") close(); });
-  targets.forEach(t => {
-    const host = t.closest("figure") || t;
-    host.setAttribute("tabindex", "0");
-    const open = () => {
-      img.src = t.currentSrc || t.src;
-      img.alt = t.alt;
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    };
-    host.addEventListener("click", open);
-    host.addEventListener("keydown", e => { if (e.key === "Enter") open(); });
-  });
-}
-
 function initDeclassify() {
   const marks = document.querySelectorAll(".redact");
   if (!marks.length) return;
@@ -608,7 +576,7 @@ function initYear() {
 
 function initFactGames() {
   const el = $("#fact-games");
-  if (el) el.textContent = pad2(GAMES.length - 1);
+  if (el) el.textContent = pad2(GAMES.filter(g => g.status === "released").length);
 }
 
 /* ---------- boot ---------- */
@@ -616,7 +584,7 @@ function initFactGames() {
 [
   renderGames, renderUpcoming, renderFooterGames,
   renderGamePage, initNav, initYear, initFactGames, initHeroScroll, initPageTransitions,
-  initScramble, initDeclassify, initCopyBlocks, initZoom,
+  initScramble, initDeclassify, initCopyBlocks,
 ].forEach(fn => {
   try { fn(); } catch (err) { console.error(`[chipstack] ${fn.name} failed:`, err); }
 });

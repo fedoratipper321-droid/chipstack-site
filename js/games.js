@@ -267,6 +267,24 @@ const GAMES = [
     closer: "One table. One bankroll. Five casinos. Then one more address, slightly higher than the rest.",
     legal: "Blackjack Empire is simulated gambling for adults 18 and over. All chips, money and prizes are virtual. Nothing can be won, withdrawn or redeemed for real money. Play responsibly.",
   },
+  {
+    slug: "slicebox",
+    title: "SLICEBOX",
+    status: "in-development",
+    year: "TBA",
+    platforms: ["ANDROID"],
+    accent: "#ff5fa2",
+    accentInk: "#ff8fc0",
+    art: "stealth",
+    privacy: "privacy-slicebox.html",
+    tagline: "Drop it. Merge it. Slice it in half.",
+    short: "A one-finger merge puzzle where every block can be cut in two. Drop, merge, and slice your way to bigger numbers.",
+    description: [
+      "Every block on the board is a physical thing you can cut. Drop the next piece, merge equals into bigger numbers, and swipe straight through a block to slice it in half — the moving half shoves its row or column out of the way. Equal values merge, chains cascade, and filled regions compact into single blocks.",
+      "Two ways to play: Endless, a relaxed score chase that runs until the board fills, and Journey, a ladder of score-target rounds capped by boss fights.",
+    ],
+    closer: "The board never asks for much. Just one more drop, one more merge, one more slice.",
+  },
 ];
 
 /* ---------- status labels ---------- */
