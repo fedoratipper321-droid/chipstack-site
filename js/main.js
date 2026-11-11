@@ -416,19 +416,180 @@ function closeCharFile() {
 
 function initNav() {
   const nav = $("#site-nav");
-  const toggle = $("#nav-toggle");
   const links = $("#nav-links");
-  if (nav) addEventListener("scroll", () =>
-    nav.classList.toggle("scrolled", scrollY > 8), { passive: true });
-  if (toggle && links) {
-    toggle.addEventListener("click", () => {
-      const open = document.body.classList.toggle("nav-open");
-      toggle.setAttribute("aria-expanded", open);
-    });
-    links.addEventListener("click", e => {
-      if (e.target.tagName === "A") document.body.classList.remove("nav-open");
-    });
+  const toggle = $("#nav-toggle");
+  if (!nav || !links || !toggle) return;
+  const mobile = matchMedia("(max-width: 800px)");
+  const dock = document.createElement("nav");
+  dock.className = "petal-nav";
+  dock.setAttribute("aria-label", "Mobile navigation");
+  const backdrop = document.createElement("div");
+  backdrop.className = "nav-backdrop";
+  backdrop.setAttribute("aria-hidden", "true");
+  const petals = document.createElement("div");
+  petals.className = "petals";
+  petals.id = "mobile-petals";
+  const offsets = [[-166, -8], [-152, -70], [-120, -132], [-66, -191], [0, -246]];
+  const items = [...links.querySelectorAll("a")].map((link, i) => {
+    const item = link.cloneNode(true);
+    item.className = "petal";
+    item.style.setProperty("--x", `${offsets[i][0]}px`);
+    item.style.setProperty("--y", `${offsets[i][1]}px`);
+    item.style.setProperty("--i", i);
+    petals.append(item);
+    return item;
+  });
+  const trigger = document.createElement("button");
+  trigger.className = "petal-trigger";
+  trigger.type = "button";
+  trigger.innerHTML = '<span aria-hidden="true" class="petal-mark"><i></i><i></i><i></i><i></i></span><span class="petal-label">MENU</span>';
+  trigger.setAttribute("aria-controls", petals.id);
+  trigger.setAttribute("aria-label", "Open navigation. Tap or drag to a destination.");
+  dock.append(petals, trigger);
+  document.body.append(backdrop, dock);
+  document.body.classList.add("petal-ready");
+  let open = false;
+  let gesture = null;
+  let selected = null;
+  let suppressClick = false;
+  function setOpen(value) {
+    open = value;
+    dock.classList.toggle("open", open);
+    backdrop.classList.toggle("open", open);
+    trigger.setAttribute("aria-expanded", String(open));
+    trigger.setAttribute("aria-label", open ? "Close navigation" : "Open navigation. Tap or drag to a destination.");
+    petals.inert = !open;
+    items.forEach(item => item.classList.remove("selected"));
+    selected = null;
   }
+  setOpen(false);
+  trigger.addEventListener("pointerdown", event => {
+    if (event.button !== 0) return;
+    gesture = { x: event.clientX, y: event.clientY, wasOpen: open, moved: false };
+    suppressClick = false;
+    trigger.setPointerCapture(event.pointerId);
+    setOpen(true);
+  });
+  trigger.addEventListener("pointermove", event => {
+    if (!gesture) return;
+    gesture.moved ||= Math.hypot(event.clientX - gesture.x, event.clientY - gesture.y) > 12;
+    if (!gesture.moved) return;
+    let nearest = null, distance = 62;
+    for (const item of items) {
+      const rect = item.getBoundingClientRect();
+      const d = Math.hypot(event.clientX - (rect.left + rect.width / 2), event.clientY - (rect.top + rect.height / 2));
+      if (d < distance) { nearest = item; distance = d; }
+    }
+    selected = nearest;
+    items.forEach(item => item.classList.toggle("selected", item === selected));
+  });
+  trigger.addEventListener("pointerup", event => {
+    if (!gesture) return;
+    const destination = selected;
+    const close = gesture.moved || gesture.wasOpen;
+    gesture = null;
+    suppressClick = true;
+    trigger.releasePointerCapture(event.pointerId);
+    if (destination) destination.click();
+    if (close) setOpen(false);
+  });
+  trigger.addEventListener("pointercancel", () => { gesture = null; setOpen(false); });
+  trigger.addEventListener("click", event => {
+    if (suppressClick && event.detail !== 0) { suppressClick = false; return; }
+    setOpen(!open);
+    if (open && event.detail === 0) items[0].focus();
+  });
+  backdrop.addEventListener("click", () => setOpen(false));
+  petals.addEventListener("click", event => {
+    if (event.target.closest("a")) { setOpen(false); trigger.focus({ preventScroll: true }); }
+  });
+  dock.addEventListener("keydown", event => {
+    if (event.key === "Escape") { setOpen(false); trigger.focus(); }
+    if (open && ["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
+      event.preventDefault();
+      const index = items.indexOf(document.activeElement);
+      const next = event.key === "Home" ? 0 : event.key === "End" ? items.length - 1 : (index + (event.key === "ArrowUp" ? -1 : 1) + items.length) % items.length;
+      items[next].focus();
+    }
+  });
+  dock.addEventListener("focusout", event => {
+    if (!dock.contains(event.relatedTarget)) setOpen(false);
+  });
+  mobile.addEventListener("change", () => setOpen(false));
+  addEventListener("pageshow", () => setOpen(false));
+  let scheduled = false;
+  const sections = [...document.querySelectorAll("#games, #upcoming, #about")];
+  function update() {
+    nav.classList.toggle("scrolled", scrollY > 8);
+    const available = document.documentElement.scrollHeight - innerHeight;
+    nav.style.setProperty("--progress", available > 0 ? scrollY / available : 0);
+    const current = sections.filter(section => section.getBoundingClientRect().top <= innerHeight * .4).pop();
+    [...links.querySelectorAll("a"), ...items].forEach(link => {
+      const url = new URL(link.href);
+      const active = current ? url.hash === `#${current.id}` : url.pathname === location.pathname && !url.hash;
+      if (active) link.setAttribute("aria-current", current ? "location" : "page");
+      else link.removeAttribute("aria-current");
+    });
+    scheduled = false;
+  }
+  addEventListener("scroll", () => {
+    if (!scheduled) { requestAnimationFrame(update); scheduled = true; }
+  }, { passive: true });
+  update();
+}
+
+function initScrollReveal() {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("revealed");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: .08 });
+  document.querySelectorAll(".section-head, .game-card, .upcoming-row, .about-grid, .pitch, .feature, .shot, .arc-step, .place, .file-block, .footer-grid").forEach((element, i) => {
+    if (element.getBoundingClientRect().top < innerHeight) return;
+    element.classList.add("reveal");
+    element.style.setProperty("--reveal-delay", `${i % 3 * 55}ms`);
+    observer.observe(element);
+  });
+  document.addEventListener("focusin", event => event.target.closest(".reveal")?.classList.add("revealed"));
+}
+
+function initShotViewer() {
+  const shots = [...document.querySelectorAll(".shot img")];
+  if (!shots.length) return;
+  const dialog = document.createElement("dialog");
+  dialog.className = "shot-viewer";
+  dialog.setAttribute("aria-label", "Gameplay screenshots");
+  dialog.innerHTML = '<button class="viewer-close" aria-label="Close screenshot">×</button><button class="viewer-prev" aria-label="Previous screenshot">←</button><figure><img alt=""><figcaption aria-live="polite"></figcaption></figure><button class="viewer-next" aria-label="Next screenshot">→</button>';
+  document.body.append(dialog);
+  let index = 0;
+  function show(next) {
+    index = (next + shots.length) % shots.length;
+    const source = shots[index];
+    $("img", dialog).src = source.src;
+    $("img", dialog).alt = source.alt;
+    $("figcaption", dialog).textContent = `${index + 1} / ${shots.length} · ${source.alt}`;
+  }
+  shots.forEach((shot, i) => {
+    const button = document.createElement("button");
+    button.className = "shot-open";
+    button.setAttribute("aria-label", `Enlarge screenshot: ${shot.alt}`);
+    shot.replaceWith(button);
+    button.append(shot);
+    button.addEventListener("click", () => { show(i); dialog.showModal(); document.body.classList.add("viewer-open"); });
+  });
+  $(".viewer-close", dialog).addEventListener("click", () => dialog.close());
+  $(".viewer-prev", dialog).addEventListener("click", () => show(index - 1));
+  $(".viewer-next", dialog).addEventListener("click", () => show(index + 1));
+  dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener("keydown", event => {
+    if (["ArrowLeft", "ArrowRight"].includes(event.key)) {
+      event.preventDefault(); show(index + (event.key === "ArrowLeft" ? -1 : 1));
+    }
+  });
+  dialog.addEventListener("close", () => document.body.classList.remove("viewer-open"));
 }
 
 function initPageTransitions() {
@@ -505,37 +666,7 @@ function initScramble() {
     zone.addEventListener("mouseenter", () => { if (!busy) { busy = true; step = 0; tick(); } });
   });
 
-  // every button + nav link: decrypt text nodes on hover (icons/svg untouched)
-  document.querySelectorAll(".btn, .nav-links a").forEach(el => {
-    const nodes = [...el.childNodes].filter(n => n.nodeType === 3 && /\S/.test(n.nodeValue));
-    if (!nodes.length) return;
-    const origs = nodes.map(n => n.nodeValue);
-    let busy = false, step = 0;
-    const tick = () => {
-      step++;
-      nodes.forEach((n, i) => { n.nodeValue = step >= 22 ? origs[i] : cipher(origs[i], step, 22); });
-      if (step < 22) requestAnimationFrame(tick); else busy = false;
-    };
-    el.addEventListener("mouseenter", () => { if (!busy) { busy = true; step = 0; tick(); } });
-  });
 
-  // headers sit as ciphertext below the fold and decode on scroll-in
-  const heads = document.querySelectorAll(".section-title, .prose h1, .prose h2, .game-hero-title");
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      const h = en.target, orig = h.dataset.orig;
-      if (!en.isIntersecting) { h.textContent = cipher(orig, 0, 1); return; }
-      let step = 0;
-      const tick = () => {
-        step++;
-        h.textContent = step >= 26 ? orig : cipher(orig, step, 26);
-        if (step < 26) requestAnimationFrame(tick);
-      };
-      tick();
-      io.unobserve(h);
-    });
-  }, { rootMargin: "0px 0px -12% 0px" });
-  heads.forEach(h => { h.dataset.orig = h.textContent; io.observe(h); });
 }
 
 function initDeclassify() {
@@ -584,7 +715,7 @@ function initFactGames() {
 [
   renderGames, renderUpcoming, renderFooterGames,
   renderGamePage, initNav, initYear, initFactGames, initHeroScroll, initPageTransitions,
-  initScramble, initDeclassify, initCopyBlocks,
+  initScramble, initDeclassify, initCopyBlocks, initShotViewer, initScrollReveal,
 ].forEach(fn => {
   try { fn(); } catch (err) { console.error(`[chipstack] ${fn.name} failed:`, err); }
 });
