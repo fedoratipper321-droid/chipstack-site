@@ -149,7 +149,7 @@ function renderGamePage() {
 
   const shotsHTML = g.shots?.length ? `
     <div class="container">
-      <div class="shot-strip">
+      <div class="shot-strip${g.shotLayout === "portrait" ? " shot-strip--portrait" : ""}">
         ${g.shots.map(s => `<figure class="shot"><img src="${s.img}" alt="${s.alt}" loading="lazy"></figure>`).join("")}
       </div>
     </div>` : "";
