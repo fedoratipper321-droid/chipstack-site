@@ -269,7 +269,7 @@ const GAMES = [
   },
   {
     slug: "slicebox",
-    title: "SLICE BOX",
+    title: "SLICEBOX",
     status: "released",
     year: "2026",
     platforms: ["ANDROID"],
@@ -282,7 +282,7 @@ const GAMES = [
     tagline: "Drop it. Merge it. Slice it in half.",
     short: "Drop numbered blocks, slice them in half, and set off chain reactions across six 3×3 grids.",
     description: [
-      "Slice Box gives you 54 spaces and a steady supply of numbered blocks. Matching numbers merge when they touch, and filling a 3×3 grid compresses it into a single block. One good chain reaction can clear room you thought you'd lost.",
+      "Slicebox gives you 54 spaces and a steady supply of numbered blocks. Matching numbers merge when they touch, and filling a 3×3 grid compresses it into a single block. One good chain reaction can clear room you thought you'd lost.",
       "Swipe through a block to split it in half. One half moves in the direction of the cut and pushes blocks out of the way. You only get a few slices, but strong chains and full grid compactions earn them back. Special boxes can pull blocks together, trigger merges across rows or columns, or turn a routine drop into a much bigger play.",
       "Chase your high score in Endless or take on Journey, where each round raises the score target and bosses change the rules.",
     ],
