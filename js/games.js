@@ -270,9 +270,10 @@ const GAMES = [
   {
     slug: "slicebox",
     title: "SLICE BOX",
-    status: "in-development",
-    year: "TBA",
+    status: "released",
+    year: "2026",
     platforms: ["ANDROID"],
+    store: "https://play.google.com/store/apps/details?id=com.slicebox.game",
     accent: "#ff5fa2",
     accentInk: "#ff8fc0",
     banner: "img/slicebox/feature.webp",
